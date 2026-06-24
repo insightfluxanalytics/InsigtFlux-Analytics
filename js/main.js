@@ -3,6 +3,14 @@
  * Interactive logic and premium UI mechanics
  */
 
+// --- Immediate Theme Check (Prevents Layout Flash) ---
+(function() {
+  const currentTheme = localStorage.getItem('theme') || 'light';
+  if (currentTheme === 'dark') {
+    document.body.classList.add('dark-theme');
+  }
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
   // --- Sticky Header Scroll Effect ---
   const header = document.querySelector('.header');
@@ -21,8 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const navMenu = document.querySelector('.nav-menu');
   if (hamburger && navMenu) {
     hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
+      const isActive = hamburger.classList.toggle('active');
       navMenu.classList.toggle('active');
+      document.body.style.overflow = isActive ? 'hidden' : 'auto';
     });
 
     // Close menu when clicking nav links
@@ -31,23 +40,22 @@ document.addEventListener('DOMContentLoaded', () => {
       link.addEventListener('click', () => {
         hamburger.classList.remove('active');
         navMenu.classList.remove('active');
+        document.body.style.overflow = 'auto';
       });
     });
 
-    // Clone and append header CTA to mobile menu drawer
-    const headerCta = document.querySelector('.nav-cta');
-    if (headerCta) {
-      const ctaBtn = headerCta.querySelector('.btn');
-      if (ctaBtn) {
-        const mobileCtaLi = document.createElement('li');
-        mobileCtaLi.className = 'nav-mobile-cta';
-        const ctaBtnClone = ctaBtn.cloneNode(true);
-        ctaBtnClone.style.width = '100%';
-        ctaBtnClone.style.marginTop = '1rem';
-        mobileCtaLi.appendChild(ctaBtnClone);
-        navMenu.appendChild(mobileCtaLi);
+    // Close menu when clicking outside the drawer
+    document.addEventListener('click', (e) => {
+      if (navMenu.classList.contains('active')) {
+        if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) {
+          hamburger.classList.remove('active');
+          navMenu.classList.remove('active');
+          document.body.style.overflow = 'auto';
+        }
       }
-    }
+    });
+
+
   }
 
   // --- Active Navigation Highlighting ---
@@ -283,6 +291,16 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalText;
       }, 1000);
+    });
+  }
+
+  // --- Theme Toggle Button Click Listener ---
+  const themeToggleBtn = document.getElementById('theme-toggle');
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('dark-theme');
+      const theme = document.body.classList.contains('dark-theme') ? 'dark' : 'light';
+      localStorage.setItem('theme', theme);
     });
   }
 });
