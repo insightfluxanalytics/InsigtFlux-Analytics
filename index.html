@@ -33,13 +33,25 @@
           <li><a href="index.html" class="nav-link active">Home</a></li>
           <li><a href="index.html#services" class="nav-link">Services</a></li>
           <li><a href="index.html#portfolio" class="nav-link">Portfolio</a></li>
+          <li><a href="index.html#pricing" class="nav-link">Pricing</a></li>
           <li><a href="careers.html" class="nav-link">Careers</a></li>
           <li><a href="contact.html" class="nav-link">Contact</a></li>
         </ul>
       </nav>
       
-      <div class="nav-cta">
-        <a href="contact.html" class="btn btn-primary" id="header-cta-btn">Book Consultation</a>
+      <div class="header-actions">
+        <button class="theme-toggle-btn" aria-label="Toggle theme" id="theme-toggle">
+          <!-- Sun Icon (visible in dark mode) -->
+          <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          <!-- Moon Icon (visible in light mode) -->
+          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+        <div class="nav-cta">
+          <a href="contact.html" class="btn btn-primary" id="header-cta-btn">
+            <span class="cta-text-desktop">Book Consultation</span>
+            <span class="cta-text-mobile">Book Call</span>
+          </a>
+        </div>
       </div>
       
       <button class="hamburger" aria-label="Toggle navigation menu" id="hamburger-menu">
@@ -143,27 +155,57 @@
     <div class="container about-layout">
       <div class="about-text reveal">
         <span class="section-badge">About Us</span>
-        <h2>Transforming Data into Actionable Outcomes</h2>
+        <h2>About InsightFlux Analytics</h2>
         <p class="about-desc">
-          InsightFlux Analytics is an AI-driven data analytics startup that simplifies business intelligence through automation and smart dashboards. By combining AI-based automation, BI tools, and industry-focused analytical templates, we help businesses make data-backed decisions quickly and effectively. Our services include automated data cleaning, dashboard creation, and end-to-end data automation.
+          <strong>InsightFlux Analytics</strong> is a technology-driven analytics and digital transformation company dedicated to helping businesses unlock the full potential of their data. We combine the power of Artificial Intelligence, Business Intelligence, Automation, and Digital Innovation to transform complex data into meaningful business outcomes. Our expertise spans Data Analytics, Power BI Dashboards, AI Automations, Website Development, Business Growth Strategy, Digital Marketing, and Custom Digital Solutions.
+        </p>
+        <p class="about-desc" style="margin-top: -1.5rem; margin-bottom: 3rem;">
+          At InsightFlux Analytics, we believe that data should do more than generate reports—it should drive growth, improve efficiency, and create competitive advantages. Through intelligent automation, interactive dashboards, AI-powered solutions, and strategic consulting, we help organizations streamline operations, make informed decisions, and accelerate their digital transformation journey.
         </p>
         
         <div class="about-pillars">
           <div class="glass-card pillar-card">
             <h3 class="pillar-title">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
-              Vision
+              Our Vision
             </h3>
-            <p class="pillar-desc">To become the most trusted AI-driven analytics partner for businesses by delivering intelligent, automated, and actionable insights.</p>
+            <p class="pillar-desc">To become a globally trusted AI-powered analytics and digital transformation partner, enabling businesses of all sizes to achieve sustainable growth through intelligent insights, automation, and innovation.</p>
           </div>
           
           <div class="glass-card pillar-card">
             <h3 class="pillar-title">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              Mission
+              Our Mission
             </h3>
-            <p class="pillar-desc">To simplify complex data using AI-based automation, empower businesses through descriptive, diagnostic, and prescriptive analytics, democratize data access through natural language querying, and deliver fast, accurate, and scalable analytical solutions across industries.</p>
+            <p class="pillar-desc">To empower businesses with data-driven strategies, AI-powered automation, and cutting-edge digital solutions that simplify complexity, improve decision-making, and deliver measurable business impact. We strive to make advanced analytics, automation, and technology accessible, scalable, and results-oriented for every organization.</p>
           </div>
+        </div>
+
+        <div class="about-values-box" style="margin-top: 3rem;">
+          <h3 style="font-size: 1.5rem; margin-bottom: 1.25rem; color: var(--deep-navy);">What We Stand For</h3>
+          <ul class="about-values-list" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-bottom: 2.5rem; padding-left: 0;">
+            <li style="display: flex; align-items: center; gap: 0.75rem; color: var(--text-muted); font-size: 0.95rem; font-weight: 500;">
+              <span style="color: var(--primary-purple); font-weight: bold; font-size: 1.2rem;">✦</span> AI-Powered Innovation
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.75rem; color: var(--text-muted); font-size: 0.95rem; font-weight: 500;">
+              <span style="color: var(--primary-purple); font-weight: bold; font-size: 1.2rem;">✦</span> Data-Driven Decision Making
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.75rem; color: var(--text-muted); font-size: 0.95rem; font-weight: 500;">
+              <span style="color: var(--primary-purple); font-weight: bold; font-size: 1.2rem;">✦</span> Business Growth & Transformation
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.75rem; color: var(--text-muted); font-size: 0.95rem; font-weight: 500;">
+              <span style="color: var(--primary-purple); font-weight: bold; font-size: 1.2rem;">✦</span> Customer-Centric Solutions
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.75rem; color: var(--text-muted); font-size: 0.95rem; font-weight: 500;">
+              <span style="color: var(--primary-purple); font-weight: bold; font-size: 1.2rem;">✦</span> Continuous Learning & Excellence
+            </li>
+            <li style="display: flex; align-items: center; gap: 0.75rem; color: var(--text-muted); font-size: 0.95rem; font-weight: 500;">
+              <span style="color: var(--primary-purple); font-weight: bold; font-size: 1.2rem;">✦</span> Transparency, Trust & Reliability
+            </li>
+          </ul>
+          <p style="color: var(--primary-purple); font-weight: 700; font-size: 1.1rem; line-height: 1.5; border-left: 3px solid var(--primary-purple); padding-left: 1rem; margin-top: 2rem;">
+            InsightFlux Analytics – Where Data Meets Innovation, and Insights Drive Growth.
+          </p>
         </div>
       </div>
       
@@ -395,6 +437,112 @@
           <h3 class="service-title">Consulting & Ongoing Support</h3>
           <p class="service-desc">Ongoing corporate support models and strategy meetings that keep your analytical pipelines operating smoothly.</p>
           <a href="contact.html?service=consulting" class="service-link">Inquire Now <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="section" id="pricing" style="background: rgba(108, 59, 255, 0.01); border-top: 1px solid rgba(108, 59, 255, 0.03);">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-badge">Pricing Plans</span>
+        <h2 class="section-title">Transparent & Scalable Pricing</h2>
+        <p class="section-subtitle">Choose a plan that fits your business scale. No hidden charges, completely tailored to your digital growth.</p>
+      </div>
+
+      <div class="pricing-grid reveal">
+        <!-- Plan 1: Local / Basic -->
+        <div class="glass-card pricing-card">
+          <div style="margin-bottom: 2rem;">
+            <span class="pricing-plan-badge">Basic / Setup</span>
+            <h3>Startup & Local</h3>
+            <p>Ideal for local businesses looking to optimize search visibility or establish a basic digital presence.</p>
+          </div>
+          <div class="pricing-price-box">
+            <span class="price-label">Starts at</span>
+            <div class="price-value-container">
+              <span class="price-amount">₹1,999</span>
+              <span class="price-period">/ project</span>
+            </div>
+          </div>
+          <ul class="pricing-features-list">
+            <li>
+              <span class="check-icon">✓</span> Google Business Profile Optimization
+            </li>
+            <li>
+              <span class="check-icon">✓</span> Basic Local SEO Audit & Setup
+            </li>
+            <li>
+              <span class="check-icon">✓</span> Social Media Profile Optimization
+            </li>
+            <li>
+              <span class="check-icon">✓</span> Basic Digital Presence Consulting
+            </li>
+          </ul>
+          <a href="contact.html?plan=startup" class="btn btn-secondary" style="width: 100%;">Get Started</a>
+        </div>
+
+        <!-- Plan 2: Analytics & Growth (Popular) -->
+        <div class="glass-card pricing-card featured-plan">
+          <div class="pricing-badge-popular">Most Popular</div>
+          <div style="margin-bottom: 2rem;">
+            <span class="pricing-plan-badge">Growth & Development</span>
+            <h3>Analytics & Dev</h3>
+            <p>Ideal for businesses requiring interactive dashboards, professional websites, or custom portfolio development.</p>
+          </div>
+          <div class="pricing-price-box">
+            <span class="price-label">Starting at</span>
+            <div class="price-value-container">
+              <span class="price-amount">₹9,999</span>
+              <span class="price-period">/ project</span>
+            </div>
+          </div>
+          <ul class="pricing-features-list">
+            <li>
+              <span class="check-icon">✓</span> Power BI / Interactive Dashboards
+            </li>
+            <li>
+              <span class="check-icon">✓</span> High-Performance Responsive Web Dev
+            </li>
+            <li>
+              <span class="check-icon">✓</span> Premium Portfolio Platform Development
+            </li>
+            <li>
+              <span class="check-icon">✓</span> SEO & Organic Traffic Setup
+            </li>
+          </ul>
+          <a href="contact.html?plan=growth" class="btn btn-primary" style="width: 100%;">Get Started</a>
+        </div>
+
+        <!-- Plan 3: Enterprise / Custom -->
+        <div class="glass-card pricing-card">
+          <div style="margin-bottom: 2rem;">
+            <span class="pricing-plan-badge">AI & Automation</span>
+            <h3>Enterprise & AI</h3>
+            <p>Designed for enterprises requiring custom AI workflows, chatbots, data engineering, and automation integrations.</p>
+          </div>
+          <div class="pricing-price-box">
+            <span class="price-label">Custom Solutions</span>
+            <div class="price-value-container">
+              <span class="price-amount" style="font-size: 2.5rem;">Let's Talk</span>
+            </div>
+          </div>
+          <ul class="pricing-features-list">
+            <li>
+              <span class="check-icon">✓</span> Custom AI Chatbots & LLM Integrations
+            </li>
+            <li>
+              <span class="check-icon">✓</span> Data Engineering & Cloud Data Warehouses
+            </li>
+            <li>
+              <span class="check-icon">✓</span> Business Growth Strategy & Lead Gen
+            </li>
+            <li>
+              <span class="check-icon">✓</span> Dedicated Support & Maintenance SLAs
+            </li>
+          </ul>
+          <a href="contact.html?plan=enterprise" class="btn btn-secondary" style="width: 100%;">Inquire Now</a>
         </div>
       </div>
     </div>
@@ -720,6 +868,7 @@
           <ul class="footer-links">
             <li><a href="#about" class="footer-link">About Us</a></li>
             <li><a href="#why-us" class="footer-link">Core Values</a></li>
+            <li><a href="#pricing" class="footer-link">Pricing Plans</a></li>
             <li><a href="careers.html" class="footer-link">Careers</a></li>
             <li><a href="contact.html" class="footer-link">Book Consultation</a></li>
           </ul>
