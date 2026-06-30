@@ -560,8 +560,9 @@
       <!-- Portfolio Filter Buttons -->
       <div class="filter-container reveal">
         <button class="filter-btn active p-filter-btn" data-filter="all" id="btn-portfolio-all">All Projects</button>
-        <button class="filter-btn p-filter-btn" data-filter="analytics" id="btn-portfolio-analytics">Analytics & BI</button>
+        <button class="filter-btn p-filter-btn" data-filter="analytics" id="btn-portfolio-analytics">Analytics &amp; BI</button>
         <button class="filter-btn p-filter-btn" data-filter="web" id="btn-portfolio-web">Websites</button>
+        <button class="filter-btn p-filter-btn" data-filter="workshop" id="btn-portfolio-workshop">Workshops</button>
       </div>
       
       <div class="portfolio-grid">
@@ -594,6 +595,37 @@
             <p class="portfolio-desc">A financial intelligence pipeline tracking transaction classifications, customer delinquent alerts, and transactional revenue trends. Open source dashboard repository.</p>
           </div>
         </a>
+
+        <!-- Project 4 -->
+        <a href="https://campus-pilot-dun.vercel.app/" target="_blank" rel="noopener" class="portfolio-card reveal delay-3" data-category="web">
+          <img src="assets/campus_pilot.png" alt="Campus Pilot Commute Sharing" class="portfolio-img">
+          <div class="portfolio-overlay">
+            <span class="portfolio-category">Websites & Web Apps</span>
+            <h3 class="portfolio-title">Campus Pilot Commute Sharing</h3>
+            <p class="portfolio-desc">A premium college ride-sharing web application custom built for Hindusthan educational campuses. Features rider/captain portals, pickup point mapping, and real-time commute sharing.</p>
+          </div>
+        </a>
+
+        <!-- Project 5: Data Analytics Workshop -->
+        <div class="portfolio-card portfolio-card--video reveal delay-4" data-category="workshop" id="workshop-card">
+          <span class="workshop-badge">🎓 FREE Workshop</span>
+          <video
+            class="portfolio-video"
+            src="assets/workshop_video.mp4"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            aria-label="Data Analytics Workshop Recording"
+          ></video>
+          <div class="portfolio-overlay">
+            <span class="portfolio-category">Workshop &amp; Training</span>
+            <h3 class="portfolio-title">Free Data Analytics Workshop</h3>
+            <p class="portfolio-desc">An end-to-end, hands-on data analytics workshop — open to all. Covering real-world data cleaning, visualization techniques, and dashboard creation using industry-standard tools.</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -925,5 +957,25 @@
 
   <!-- Scripts -->
   <script src="js/main.js"></script>
+
+  <!-- Video Lightbox Modal -->
+  <div class="video-modal-overlay" id="video-modal" role="dialog" aria-modal="true" aria-label="Workshop Video Player">
+    <div class="video-modal-box">
+      <button class="video-modal-close" id="video-modal-close" aria-label="Close video">&times;</button>
+      <div class="video-modal-header">
+        <span class="video-modal-badge">🎓 FREE Workshop</span>
+        <h3 class="video-modal-title">Free Data Analytics Workshop</h3>
+      </div>
+      <video
+        id="workshop-modal-video"
+        class="video-modal-player"
+        src="assets/workshop_video.mp4"
+        controls
+        preload="metadata"
+        aria-label="Data Analytics Workshop Recording"
+      ></video>
+    </div>
+  </div>
 </body>
+
 </html>
