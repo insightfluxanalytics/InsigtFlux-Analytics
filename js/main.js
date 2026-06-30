@@ -303,4 +303,50 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('theme', theme);
     });
   }
+
+  // --- Workshop Video Lightbox ---
+  const workshopCard   = document.getElementById('workshop-card');
+  const videoModal     = document.getElementById('video-modal');
+  const videoModalClose = document.getElementById('video-modal-close');
+  const modalVideo     = document.getElementById('workshop-modal-video');
+
+  function openVideoModal() {
+    videoModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    if (modalVideo) {
+      modalVideo.currentTime = 0;
+      modalVideo.play();
+    }
+  }
+
+  function closeVideoModal() {
+    videoModal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+    if (modalVideo) {
+      modalVideo.pause();
+    }
+  }
+
+  if (workshopCard && videoModal) {
+    // Open on card click
+    workshopCard.addEventListener('click', openVideoModal);
+
+    // Close via × button
+    if (videoModalClose) {
+      videoModalClose.addEventListener('click', closeVideoModal);
+    }
+
+    // Close by clicking the dark backdrop
+    videoModal.addEventListener('click', (e) => {
+      if (e.target === videoModal) closeVideoModal();
+    });
+
+    // Close with Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && videoModal.classList.contains('active')) {
+        closeVideoModal();
+      }
+    });
+  }
 });
+
