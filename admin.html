@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Portal - InsightFlux Analytics</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Admin Portal Specific CSS Overrides & Custom Glass Styles */
+    .admin-body {
+      font-family: 'Inter', sans-serif;
+      background-color: #FFF5F9;
+      background-image: linear-gradient(135deg, #FFE9F3 0%, #E8DFFF 50%, #FFFFFF 100%);
+      background-attachment: fixed;
+      min-height: 100vh;
+      color: var(--text-dark);
+      padding: 0;
+      margin: 0;
+    }
+
+    [data-theme="dark"] .admin-body {
+      background-color: var(--dark-navy);
+      background-image: radial-gradient(circle at 10% 20%, rgba(108, 59, 255, 0.05) 0%, transparent 40%),
+                        radial-gradient(circle at 90% 80%, rgba(138, 92, 255, 0.04) 0%, transparent 40%);
+      color: var(--text-light);
+    }
+
+    /* Auth Card (Glass Panel) */
+    .auth-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    .auth-card {
+      width: 100%;
+      max-width: 440px;
+      padding: 2.5rem;
+      border-radius: 24px;
+      border: 1px solid var(--border-color);
+      background: var(--glass-bg);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      box-shadow: 0 20px 50px rgba(108, 59, 255, 0.08);
+      text-align: center;
+    }
+
+    .auth-logo {
+      height: 64px;
+      width: auto;
+      margin: 0 auto 1.5rem;
+      border-radius: 12px;
+    }
+
+    .auth-title {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      color: var(--deep-navy);
+    }
+
+    .auth-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .form-group-admin {
+      margin-bottom: 1.25rem;
+      text-align: left;
+    }
+
+    .form-group-admin label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .admin-input {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: rgba(255, 255, 255, 0.5);
+      color: var(--text-dark);
+      transition: all 0.3s ease;
+    }
+
+    [data-theme="dark"] .admin-input {
+      background: rgba(11, 15, 25, 0.5);
+      color: var(--text-light);
+      border-color: rgba(108, 59, 255, 0.25);
+    }
+
+    .admin-input:focus {
+      outline: none;
+      border-color: var(--primary-purple);
+      box-shadow: 0 0 10px rgba(108, 59, 255, 0.15);
+    }
+
+    /* Dashboard Layout */
+    .admin-header {
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid var(--border-color);
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .admin-header-logo-group {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .admin-header-logo {
+      height: 40px;
+      border-radius: 8px;
+    }
+
+    .admin-header-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--deep-navy);
+      letter-spacing: -0.01em;
+      margin: 0;
+    }
+
+    .admin-header-title span {
+      background: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .admin-dashboard-container {
+      max-width: 1300px;
+      margin: 2.5rem auto;
+      padding: 0 2rem;
+    }
+
+    /* Stats Grid */
+    .admin-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .stat-card-glass {
+      padding: 1.75rem;
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+      background: var(--glass-bg);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      box-shadow: var(--glass-shadow);
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      transition: transform 0.3s ease;
+    }
+
+    .stat-card-glass:hover {
+      transform: translateY(-4px);
+    }
+
+    .stat-icon-wrapper {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(108, 59, 255, 0.1);
+      color: var(--primary-purple);
+    }
+
+    .stat-info h3 {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin: 0 0 0.25rem 0;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .stat-info p {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--deep-navy);
+      margin: 0;
+      line-height: 1;
+    }
+
+    /* Controls & Tabs Container */
+    .dashboard-panel-glass {
+      border-radius: 24px;
+      border: 1px solid var(--border-color);
+      background: var(--glass-bg);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      box-shadow: var(--glass-shadow);
+      padding: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .panel-controls-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid rgba(108, 59, 255, 0.1);
+      padding-bottom: 1.5rem;
+    }
+
+    .admin-tabs-list {
+      display: flex;
+      gap: 0.5rem;
+      background: rgba(108, 59, 255, 0.05);
+      padding: 0.35rem;
+      border-radius: 12px;
+      border: 1px solid rgba(108, 59, 255, 0.08);
+    }
+
+    .admin-tab-btn {
+      padding: 0.6rem 1.25rem;
+      border-radius: 8px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .admin-tab-btn.active {
+      background: #fff;
+      color: var(--primary-purple);
+      box-shadow: 0 4px 12px rgba(108, 59, 255, 0.1);
+    }
+
+    [data-theme="dark"] .admin-tab-btn.active {
+      background: var(--deep-navy);
+      color: var(--secondary-purple);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    }
+
+    .panel-actions-group {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .search-input-admin {
+      padding: 0.55rem 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: rgba(255, 255, 255, 0.5);
+      font-size: 0.85rem;
+      width: 220px;
+      transition: all 0.3s ease;
+    }
+
+    .search-input-admin:focus {
+      outline: none;
+      width: 280px;
+      border-color: var(--primary-purple);
+    }
+
+    /* Data Table / Content rendering */
+    .table-responsive-admin {
+      overflow-x: auto;
+      border-radius: 12px;
+      border: 1px solid rgba(108, 59, 255, 0.1);
+    }
+
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    .admin-table th {
+      background: rgba(108, 59, 255, 0.05);
+      color: var(--deep-navy);
+      font-weight: 600;
+      padding: 1rem 1.25rem;
+      border-bottom: 2px solid rgba(108, 59, 255, 0.1);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .admin-table td {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid rgba(108, 59, 255, 0.08);
+      color: var(--text-dark);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+
+    [data-theme="dark"] .admin-table td {
+      color: var(--text-light);
+    }
+
+    .admin-table tr:hover td {
+      background: rgba(108, 59, 255, 0.02);
+    }
+
+    .action-btn-admin {
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      color: #EF4444;
+      padding: 0.35rem 0.65rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .action-btn-admin:hover {
+      background: #EF4444;
+      color: #fff;
+      border-color: #EF4444;
+      box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+    }
+
+    .btn-outline-admin {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--primary-purple);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .btn-outline-admin:hover {
+      background: var(--primary-purple);
+      color: #fff;
+      border-color: var(--primary-purple);
+    }
+
+    .empty-state-box {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--text-muted);
+    }
+
+    .empty-state-box svg {
+      color: var(--primary-purple);
+      opacity: 0.4;
+      margin-bottom: 1rem;
+    }
+
+    /* Modal dialog overrides for theme toggles */
+    [data-theme="dark"] .admin-header {
+      background: rgba(11, 15, 25, 0.85);
+      border-color: rgba(108, 59, 255, 0.2);
+    }
+
+    [data-theme="dark"] .admin-header-title {
+      color: var(--white);
+    }
+
+    [data-theme="dark"] .dashboard-panel-glass {
+      background: rgba(17, 24, 39, 0.65);
+      border-color: rgba(108, 59, 255, 0.2);
+    }
+
+    /* Responsive adjustments for Admin Portal */
+    @media (max-width: 768px) {
+      .admin-header {
+        padding: 1rem 1.25rem;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+      }
+      .admin-header-logo-group {
+        width: 100%;
+        justify-content: flex-start;
+      }
+      .admin-dashboard-container {
+        padding: 0 1.25rem;
+        margin: 1.5rem auto;
+      }
+      .dashboard-panel-glass {
+        padding: 1.25rem;
+      }
+      .panel-controls-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.25rem;
+        padding-bottom: 1.25rem;
+      }
+      .admin-tabs-list {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.35rem;
+        padding: 0.5rem;
+      }
+      .admin-tab-btn {
+        width: 100%;
+        text-align: left;
+        padding: 0.5rem 1rem;
+      }
+      .panel-actions-group {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .search-input-admin {
+        width: 100% !important;
+        max-width: 100%;
+      }
+      .btn-outline-admin {
+        width: 100%;
+        justify-content: center;
+      }
+      .auth-container {
+        padding: 1rem;
+      }
+      .auth-card {
+        padding: 1.75rem 1.25rem;
+      }
+      .modal-container {
+        width: 95%;
+        margin: 0 auto;
+      }
+      .modal-body {
+        padding: 1.5rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body class="admin-body">
+
+  <div class="dot-grid-bg"></div>
+
+  <!-- Authentication Login Screen -->
+  <div id="admin-login-screen" class="auth-container">
+    <div class="auth-card">
+      <img src="assets/logo.jpeg" alt="InsightFlux Logo" class="auth-logo">
+      <h1 class="auth-title">Admin Console</h1>
+      <p class="auth-subtitle">Sign in to manage InsightFlux operations</p>
+      
+      <div id="login-error-msg" style="color: #ef4444; font-size: 0.85rem; margin-bottom: 1rem; font-weight: 600; display: none;">
+        Invalid username or password!
+      </div>
+
+      <form id="admin-login-form">
+        <div class="form-group-admin">
+          <label for="admin-username">Username</label>
+          <input type="text" id="admin-username" class="admin-input" placeholder="sudharsan" required autocomplete="username">
+        </div>
+        
+        <div class="form-group-admin">
+          <label for="admin-password">Password</label>
+          <input type="password" id="admin-password" class="admin-input" placeholder="••••••••" required autocomplete="current-password">
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Verify Credentials</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Dashboard Panel Screen -->
+  <div id="admin-dashboard-screen" style="display: none;">
+    <!-- Admin Header -->
+    <header class="admin-header">
+      <div class="admin-header-logo-group">
+        <a href="index.html">
+          <img src="assets/logo.jpeg" alt="InsightFlux Logo" class="admin-header-logo">
+        </a>
+        <h2 class="admin-header-title">InsightFlux <span>Admin Portal</span></h2>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <!-- Theme Toggle -->
+        <button class="theme-toggle-btn" aria-label="Toggle theme" id="theme-toggle" style="background: transparent; border: none; cursor: pointer;">
+          <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+
+        <button id="admin-logout-btn" class="btn-outline-admin">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+          Logout
+        </button>
+      </div>
+    </header>
+
+    <main class="admin-dashboard-container">
+      <!-- Stats Cards -->
+      <section class="admin-stats-grid">
+        <!-- Stat 1 -->
+        <div class="stat-card-glass">
+          <div class="stat-icon-wrapper" style="background: rgba(108, 59, 255, 0.1); color: var(--primary-purple);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg>
+          </div>
+          <div class="stat-info">
+            <h3>Workshop Registrations</h3>
+            <p id="stat-count-registrations">0</p>
+          </div>
+        </div>
+        
+        <!-- Stat 2 -->
+        <div class="stat-card-glass">
+          <div class="stat-icon-wrapper" style="background: rgba(14, 165, 233, 0.1); color: #0EA5E9;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          </div>
+          <div class="stat-info">
+            <h3>Contact Inquiries</h3>
+            <p id="stat-count-contacts">0</p>
+          </div>
+        </div>
+        
+        <!-- Stat 3 -->
+        <div class="stat-card-glass">
+          <div class="stat-icon-wrapper" style="background: rgba(5, 150, 105, 0.1); color: #059669;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+          </div>
+          <div class="stat-info">
+            <h3>Job Applications</h3>
+            <p id="stat-count-applications">0</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Main Panel -->
+      <section class="dashboard-panel-glass">
+        <!-- Controls & Tab Nav -->
+        <div class="panel-controls-row">
+          <div class="admin-tabs-list">
+            <button class="admin-tab-btn active" data-tab="registrations">Workshop Registrations</button>
+            <button class="admin-tab-btn" data-tab="contacts">Contact Inquiries</button>
+            <button class="admin-tab-btn" data-tab="applications">Job Applications</button>
+          </div>
+
+          <div class="panel-actions-group">
+            <input type="text" id="admin-search-box" class="search-input-admin" placeholder="Search entries...">
+            <button id="admin-clear-btn" class="btn-outline-admin" style="border-color: rgba(239, 68, 68, 0.3); color: #EF4444;" title="Clear all data">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18m-2 0v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6m3 0V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+              Clear Tab Entries
+            </button>
+          </div>
+        </div>
+
+        <!-- Rendered Tables -->
+        <div id="tab-content-registrations" class="tab-panel-admin">
+          <div class="table-responsive-admin">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Student Name</th>
+                  <th>Email Address</th>
+                  <th>WhatsApp Number</th>
+                  <th>Institution/Company</th>
+                  <th>Workshop Name</th>
+                  <th style="text-align: center;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="registrations-table-body">
+                <!-- Injected by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="tab-content-contacts" class="tab-panel-admin" style="display: none;">
+          <div class="table-responsive-admin">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Sender</th>
+                  <th>Corporate Email</th>
+                  <th>Phone</th>
+                  <th>Company</th>
+                  <th>Channel</th>
+                  <th style="width: 30%;">Project Brief</th>
+                  <th style="text-align: center;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="contacts-table-body">
+                <!-- Injected by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="tab-content-applications" class="tab-panel-admin" style="display: none;">
+          <div class="table-responsive-admin">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Candidate</th>
+                  <th>Applied Role</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>LinkedIn/Portfolio</th>
+                  <th style="width: 25%;">Motivation</th>
+                  <th style="text-align: center;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="applications-table-body">
+                <!-- Injected by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // --- DOM Elements ---
+    const loginScreen = document.getElementById('admin-login-screen');
+    const dashboardScreen = document.getElementById('admin-dashboard-screen');
+    const loginForm = document.getElementById('admin-login-form');
+    const loginError = document.getElementById('login-error-msg');
+    const logoutBtn = document.getElementById('admin-logout-btn');
+    const clearBtn = document.getElementById('admin-clear-btn');
+    const searchBox = document.getElementById('admin-search-box');
+    const themeToggle = document.getElementById('theme-toggle');
+
+    // --- Page State Initialization ---
+    let currentActiveTab = "registrations";
+    let filterQuery = "";
+
+    // --- Authentication Logic ---
+    function checkAuthState() {
+      const isLoggedIn = sessionStorage.getItem('admin_logged_in') === 'true';
+      if (isLoggedIn) {
+        loginScreen.style.display = 'none';
+        dashboardScreen.style.display = 'block';
+        document.body.classList.add('admin-panel-active');
+        initializeDatabase();
+        renderDashboard();
+      } else {
+        loginScreen.style.display = 'flex';
+        dashboardScreen.style.display = 'none';
+        document.body.classList.remove('admin-panel-active');
+      }
+    }
+
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const userVal = document.getElementById('admin-username').value.trim();
+      const passVal = document.getElementById('admin-password').value;
+
+      if (userVal === "sudharsan" && passVal === "Su@12345") {
+        sessionStorage.setItem('admin_logged_in', 'true');
+        loginError.style.display = 'none';
+        loginForm.reset();
+        checkAuthState();
+      } else {
+        loginError.style.display = 'block';
+        loginError.textContent = "Invalid username or password!";
+      }
+    });
+
+    logoutBtn.addEventListener('click', () => {
+      sessionStorage.removeItem('admin_logged_in');
+      checkAuthState();
+    });
+
+    // --- LocalStorage DB Initialization ---
+    function initializeDatabase() {
+      if (!localStorage.getItem('insightflux_db_init_v2')) {
+        localStorage.setItem('insightflux_workshop_registrations', JSON.stringify([]));
+        localStorage.setItem('insightflux_contacts', JSON.stringify([]));
+        localStorage.setItem('insightflux_applications', JSON.stringify([]));
+        localStorage.setItem('insightflux_db_init_v2', 'true');
+      }
+    }
+
+    clearBtn.addEventListener('click', () => {
+      if (confirm(`Are you sure you want to permanently clear ALL entries in the current tab (${currentActiveTab})? This cannot be undone.`)) {
+        localStorage.setItem(`insightflux_${currentActiveTab}`, JSON.stringify([]));
+        renderDashboard();
+      }
+    });
+
+    // --- Tab Highlighting Logic ---
+    const tabButtons = document.querySelectorAll('.admin-tab-btn');
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        currentActiveTab = btn.getAttribute('data-tab');
+        
+        // Toggle panel display
+        document.querySelectorAll('.tab-panel-admin').forEach(panel => panel.style.display = 'none');
+        document.getElementById(`tab-content-${currentActiveTab}`).style.display = 'block';
+        
+        renderActiveTable();
+      });
+    });
+
+    // --- Search Filtering ---
+    searchBox.addEventListener('input', (e) => {
+      filterQuery = e.target.value.trim().toLowerCase();
+      renderActiveTable();
+    });
+
+    // --- Table Rendering Functions ---
+    function renderDashboard() {
+      // Calculate Stats
+      const regs = JSON.parse(localStorage.getItem('insightflux_workshop_registrations') || '[]');
+      const contacts = JSON.parse(localStorage.getItem('insightflux_contacts') || '[]');
+      const apps = JSON.parse(localStorage.getItem('insightflux_applications') || '[]');
+
+      document.getElementById('stat-count-registrations').textContent = regs.length;
+      document.getElementById('stat-count-contacts').textContent = contacts.length;
+      document.getElementById('stat-count-applications').textContent = apps.length;
+
+      renderActiveTable();
+    }
+
+    function renderActiveTable() {
+      const query = filterQuery;
+      
+      if (currentActiveTab === "registrations") {
+        const regs = JSON.parse(localStorage.getItem('insightflux_workshop_registrations') || '[]');
+        const filtered = regs.filter(r => 
+          r.name.toLowerCase().includes(query) || 
+          r.email.toLowerCase().includes(query) || 
+          r.phone.toLowerCase().includes(query) || 
+          r.company.toLowerCase().includes(query) || 
+          r.eventName.toLowerCase().includes(query)
+        );
+        
+        const tbody = document.getElementById('registrations-table-body');
+        tbody.innerHTML = '';
+        
+        if (filtered.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="7" class="empty-state-box">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+            <p>No matching workshop registrations found.</p>
+          </td></tr>`;
+          return;
+        }
+
+        filtered.forEach(item => {
+          tbody.innerHTML += `
+            <tr>
+              <td><strong>${item.date}</strong></td>
+              <td>${escapeHtml(item.name)}</td>
+              <td><a href="mailto:${escapeHtml(item.email)}" style="color: var(--primary-purple);">${escapeHtml(item.email)}</a></td>
+              <td>${escapeHtml(item.whatsapp || item.phone || 'N/A')}</td>
+              <td>${escapeHtml(item.company)}</td>
+              <td><span style="background: rgba(108, 59, 255, 0.08); padding: 0.25rem 0.5rem; border-radius: 4px; color: var(--primary-purple); font-size: 0.8rem; font-weight: 600;">${escapeHtml(item.eventName)}</span></td>
+              <td style="text-align: center;"><button class="action-btn-admin" onclick="deleteRecord('registrations', ${item.id})">Delete</button></td>
+            </tr>
+          `;
+        });
+
+      } else if (currentActiveTab === "contacts") {
+        const contacts = JSON.parse(localStorage.getItem('insightflux_contacts') || '[]');
+        const filtered = contacts.filter(c => 
+          c.name.toLowerCase().includes(query) || 
+          c.email.toLowerCase().includes(query) || 
+          c.phone.toLowerCase().includes(query) || 
+          c.company.toLowerCase().includes(query) || 
+          c.service.toLowerCase().includes(query) || 
+          c.message.toLowerCase().includes(query)
+        );
+        
+        const tbody = document.getElementById('contacts-table-body');
+        tbody.innerHTML = '';
+
+        if (filtered.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="8" class="empty-state-box">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+            <p>No matching contact inquiries found.</p>
+          </td></tr>`;
+          return;
+        }
+
+        filtered.forEach(item => {
+          tbody.innerHTML += `
+            <tr>
+              <td><strong>${item.date}</strong></td>
+              <td><strong>${escapeHtml(item.name)}</strong></td>
+              <td><a href="mailto:${escapeHtml(item.email)}" style="color: var(--primary-purple);">${escapeHtml(item.email)}</a></td>
+              <td>${escapeHtml(item.phone)}</td>
+              <td>${escapeHtml(item.company)}</td>
+              <td><span style="background: rgba(14, 165, 233, 0.08); padding: 0.25rem 0.5rem; border-radius: 4px; color: #0EA5E9; font-size: 0.8rem; font-weight: 600;">${escapeHtml(item.service)}</span></td>
+              <td><p style="margin:0; font-size:0.85rem; max-height:120px; overflow-y:auto; white-space:pre-wrap;">${escapeHtml(item.message)}</p></td>
+              <td style="text-align: center;"><button class="action-btn-admin" onclick="deleteRecord('contacts', ${item.id})">Delete</button></td>
+            </tr>
+          `;
+        });
+
+      } else if (currentActiveTab === "applications") {
+        const apps = JSON.parse(localStorage.getItem('insightflux_applications') || '[]');
+        const filtered = apps.filter(a => 
+          a.name.toLowerCase().includes(query) || 
+          a.role.toLowerCase().includes(query) || 
+          a.email.toLowerCase().includes(query) || 
+          a.phone.toLowerCase().includes(query) || 
+          a.portfolio.toLowerCase().includes(query) || 
+          a.message.toLowerCase().includes(query)
+        );
+        
+        const tbody = document.getElementById('applications-table-body');
+        tbody.innerHTML = '';
+
+        if (filtered.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="8" class="empty-state-box">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+            <p>No matching job applications found.</p>
+          </td></tr>`;
+          return;
+        }
+
+        filtered.forEach(item => {
+          tbody.innerHTML += `
+            <tr>
+              <td><strong>${item.date}</strong></td>
+              <td><strong>${escapeHtml(item.name)}</strong></td>
+              <td><span style="background: rgba(5, 150, 105, 0.08); padding: 0.25rem 0.5rem; border-radius: 4px; color: #059669; font-size: 0.8rem; font-weight: 600;">${escapeHtml(item.role)}</span></td>
+              <td><a href="mailto:${escapeHtml(item.email)}" style="color: var(--primary-purple);">${escapeHtml(item.email)}</a></td>
+              <td>${escapeHtml(item.phone)}</td>
+              <td><a href="${escapeHtml(item.portfolio)}" target="_blank" rel="noopener" style="color: var(--primary-purple); text-decoration:underline; font-size:0.85rem;">View Profile</a></td>
+              <td><p style="margin:0; font-size:0.85rem; max-height:120px; overflow-y:auto; white-space:pre-wrap;">${escapeHtml(item.message)}</p></td>
+              <td style="text-align: center;"><button class="action-btn-admin" onclick="deleteRecord('applications', ${item.id})">Delete</button></td>
+            </tr>
+          `;
+        });
+      }
+    }
+
+    // --- Delete Record Handler ---
+    window.deleteRecord = function(dbKey, id) {
+      if (confirm("Are you sure you want to delete this entry?")) {
+        const fullKey = `insightflux_${dbKey}`;
+        const items = JSON.parse(localStorage.getItem(fullKey) || '[]');
+        const updated = items.filter(item => item.id !== id);
+        localStorage.setItem(fullKey, JSON.stringify(updated));
+        renderDashboard();
+      }
+    };
+
+    // --- Helper Utils ---
+    function escapeHtml(text) {
+      if (!text) return '';
+      return text
+        .toString()
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    // --- Theme Control ---
+    function applySavedTheme() {
+      const currentTheme = localStorage.getItem('theme') || 'dark';
+      if (currentTheme === 'dark') {
+        document.body.classList.add('dark-theme');
+      } else {
+        document.body.classList.remove('dark-theme');
+      }
+    }
+
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-theme');
+      const isDark = document.body.classList.contains('dark-theme');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+
+    // Run theme check immediately
+    applySavedTheme();
+    
+    // Check login state
+    checkAuthState();
+  </script>
+</body>
+</html>
