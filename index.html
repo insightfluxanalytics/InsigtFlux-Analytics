@@ -14,6 +14,16 @@
 </head>
 <body>
 
+  <!-- Parallax Blobs for Meltano-style background animation -->
+  <div class="parallax-blob-container">
+    <div class="parallax-blob blob-purple" style="top: 15vh; left: 10%; width: 40vw; height: 40vw;" data-speed="0.15"></div>
+    <div class="parallax-blob blob-blue" style="top: 95vh; right: 5%; width: 45vw; height: 45vw;" data-speed="-0.1"></div>
+    <div class="parallax-blob blob-pink" style="top: 220vh; left: -5%; width: 50vw; height: 50vw;" data-speed="0.2"></div>
+    <div class="parallax-blob blob-purple" style="top: 380vh; right: 10%; width: 40vw; height: 40vw;" data-speed="-0.15"></div>
+    <div class="parallax-blob blob-blue" style="top: 550vh; left: 8%; width: 45vw; height: 45vw;" data-speed="0.12"></div>
+    <div class="parallax-blob blob-pink" style="top: 720vh; right: 5%; width: 48vw; height: 48vw;" data-speed="-0.2"></div>
+  </div>
+
   <!-- Techy Background Grid & Glows -->
   <div class="dot-grid-bg"></div>
   <div class="hero-glow-container">
@@ -64,6 +74,12 @@
 
   <!-- Hero Section -->
   <section class="hero" id="home">
+    <!-- Hero Parallax Office Background (Meltano Style) -->
+    <div class="hero-parallax-container">
+      <div class="hero-parallax-layer layer-office" style="background-image: url('assets/office_bg.jpg');" data-speed="0.12"></div>
+      <div class="hero-office-overlay"></div>
+    </div>
+    
     <div class="container hero-content">
       <div class="hero-badge reveal">AI-Powered Insights • Smarter Decisions • Limitless Growth</div>
       
@@ -88,6 +104,350 @@
     </div>
   </section>
 
+  <!-- Upcoming Events Section -->
+  <section class="section events-section" id="upcoming-events">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-badge">What's On</span>
+        <h2 class="section-title">Upcoming Events</h2>
+        <p class="section-subtitle">Join our live workshops, webinars, and community sessions to sharpen your data skills and stay ahead of the curve.</p>
+      </div>
+
+      <div class="events-slider-wrapper reveal">
+        <!-- Slider Track -->
+        <div class="events-slider" id="events-slider">
+
+          <!-- Event Card 1 -->
+          <div class="event-card glass-card">
+            <div class="event-card-header" style="background: linear-gradient(135deg, #6C3BFF 0%, #A855F7 100%);">
+              <div class="event-type-badge">Free Workshop</div>
+              <div class="event-date-bubble">
+                <span class="event-day">19</span>
+                <span class="event-month">Jul</span>
+              </div>
+            </div>
+            <div class="event-card-body">
+              <div class="event-meta">
+                <span class="event-mode online">Online • Zoom</span>
+                <span class="event-time">10:00 AM IST</span>
+              </div>
+              <h3 class="event-title">Data Analytics Bootcamp for Beginners</h3>
+              <p class="event-desc">A hands-on 3-hour live session covering Excel, SQL basics, and Power BI fundamentals. Perfect for students and career switchers.</p>
+              <div class="event-countdown" data-date="2026-07-19T10:00:00+05:30">
+                <div class="countdown-block"><span class="cdown-val" data-unit="days">--</span><span class="cdown-label">Days</span></div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-block"><span class="cdown-val" data-unit="hours">--</span><span class="cdown-label">Hrs</span></div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-block"><span class="cdown-val" data-unit="mins">--</span><span class="cdown-label">Min</span></div>
+              </div>
+              <a href="#" class="event-register-btn btn-register-event" data-event="Data Analytics Bootcamp for Beginners">Register Free →</a>
+            </div>
+          </div>
+
+          <!-- Event Card 2 -->
+          <div class="event-card glass-card">
+            <div class="event-card-header" style="background: linear-gradient(135deg, #0EA5E9 0%, #6366F1 100%);">
+              <div class="event-type-badge">Webinar</div>
+              <div class="event-date-bubble">
+                <span class="event-day">26</span>
+                <span class="event-month">Jul</span>
+              </div>
+            </div>
+            <div class="event-card-body">
+              <div class="event-meta">
+                <span class="event-mode online">Online • Google Meet</span>
+                <span class="event-time">6:00 PM IST</span>
+              </div>
+              <h3 class="event-title">AI in Business: Real-World Automation Use Cases</h3>
+              <p class="event-desc">Discover how Indian SMBs are using AI to cut costs and boost efficiency. Live demos with n8n, Make.com, and OpenAI integrations.</p>
+              <div class="event-countdown" data-date="2026-07-26T18:00:00+05:30">
+                <div class="countdown-block"><span class="cdown-val" data-unit="days">--</span><span class="cdown-label">Days</span></div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-block"><span class="cdown-val" data-unit="hours">--</span><span class="cdown-label">Hrs</span></div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-block"><span class="cdown-val" data-unit="mins">--</span><span class="cdown-label">Min</span></div>
+              </div>
+              <a href="#" class="event-register-btn btn-register-event" data-event="AI in Business: Real-World Automation Use Cases">Register Free →</a>
+            </div>
+          </div>
+
+          <!-- Event Card 3 -->
+          <div class="event-card glass-card">
+            <div class="event-card-header" style="background: linear-gradient(135deg, #059669 0%, #0EA5E9 100%);">
+              <div class="event-type-badge">Masterclass</div>
+              <div class="event-date-bubble">
+                <span class="event-day">09</span>
+                <span class="event-month">Aug</span>
+              </div>
+            </div>
+            <div class="event-card-body">
+              <div class="event-meta">
+                <span class="event-mode online">Online • Zoom</span>
+                <span class="event-time">11:00 AM IST</span>
+              </div>
+              <h3 class="event-title">Power BI Masterclass: Build a Live Sales Dashboard</h3>
+              <p class="event-desc">Step-by-step guided session to design a fully interactive sales dashboard with DAX formulas, drill-throughs, and dynamic slicers from scratch.</p>
+              <div class="event-countdown" data-date="2026-08-09T11:00:00+05:30">
+                <div class="countdown-block"><span class="cdown-val" data-unit="days">--</span><span class="cdown-label">Days</span></div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-block"><span class="cdown-val" data-unit="hours">--</span><span class="cdown-label">Hrs</span></div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-block"><span class="cdown-val" data-unit="mins">--</span><span class="cdown-label">Min</span></div>
+              </div>
+              <a href="#" class="event-register-btn btn-register-event" data-event="Power BI Masterclass: Build a Live Sales Dashboard">Register Now →</a>
+            </div>
+          </div>
+
+          <!-- Event Card 4 -->
+          <div class="event-card glass-card">
+            <div class="event-card-header" style="background: linear-gradient(135deg, #F59E0B 0%, #EF4444 100%);">
+              <div class="event-type-badge">Hackathon</div>
+              <div class="event-date-bubble">
+                <span class="event-day">23</span>
+                <span class="event-month">Aug</span>
+              </div>
+            </div>
+            <div class="event-card-body">
+              <div class="event-meta">
+                <span class="event-mode hybrid">Hybrid • Coimbatore + Online</span>
+                <span class="event-time">9:00 AM IST</span>
+              </div>
+              <h3 class="event-title">InsightFlux DataThon 2026 — 24-Hour Hackathon</h3>
+              <p class="event-desc">Compete with teams of analysts and developers to solve a live business problem using real-world datasets. Prizes worth ₹50,000+ to be won.</p>
+              <div class="event-countdown" data-date="2026-08-23T09:00:00+05:30">
+                <div class="countdown-block"><span class="cdown-val" data-unit="days">--</span><span class="cdown-label">Days</span></div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-block"><span class="cdown-val" data-unit="hours">--</span><span class="cdown-label">Hrs</span></div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-block"><span class="cdown-val" data-unit="mins">--</span><span class="cdown-label">Min</span></div>
+              </div>
+              <a href="#" class="event-register-btn event-register-btn--hot btn-register-event" data-event="InsightFlux DataThon 2026 — 24-Hour Hackathon">Register Now →</a>
+            </div>
+          </div>
+
+          <!-- Event Card 5 -->
+          <div class="event-card glass-card">
+            <div class="event-card-header" style="background: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);">
+              <div class="event-type-badge">Panel Talk</div>
+              <div class="event-date-bubble">
+                <span class="event-day">06</span>
+                <span class="event-month">Sep</span>
+              </div>
+            </div>
+            <div class="event-card-body">
+              <div class="event-meta">
+                <span class="event-mode online">Online • YouTube Live</span>
+                <span class="event-time">7:00 PM IST</span>
+              </div>
+              <h3 class="event-title">Future of Work: AI, Analytics & Career Transitions</h3>
+              <p class="event-desc">Industry experts share insights on how AI is reshaping job roles and what skills are essential for the next decade of data-driven careers.</p>
+              <div class="event-countdown" data-date="2026-09-06T19:00:00+05:30">
+                <div class="countdown-block"><span class="cdown-val" data-unit="days">--</span><span class="cdown-label">Days</span></div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-block"><span class="cdown-val" data-unit="hours">--</span><span class="cdown-label">Hrs</span></div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-block"><span class="cdown-val" data-unit="mins">--</span><span class="cdown-label">Min</span></div>
+              </div>
+              <a href="#" class="event-register-btn btn-register-event" data-event="Future of Work: AI, Analytics & Career Transitions">Register Free →</a>
+            </div>
+          </div>
+
+          <!-- Event Card 6 -->
+          <div class="event-card glass-card">
+            <div class="event-card-header" style="background: linear-gradient(135deg, #0F172A 0%, #6C3BFF 100%);">
+              <div class="event-type-badge">Product Launch</div>
+              <div class="event-date-bubble">
+                <span class="event-day">20</span>
+                <span class="event-month">Sep</span>
+              </div>
+            </div>
+            <div class="event-card-body">
+              <div class="event-meta">
+                <span class="event-mode online">Online • Zoom</span>
+                <span class="event-time">12:00 PM IST</span>
+              </div>
+              <h3 class="event-title">InsightFlux AI Dashboard Suite — Grand Launch</h3>
+              <p class="event-desc">Be among the first to experience our flagship AI-powered dashboard platform. Exclusive early-bird pricing for attendees and a live product walkthrough.</p>
+              <div class="event-countdown" data-date="2026-09-20T12:00:00+05:30">
+                <div class="countdown-block"><span class="cdown-val" data-unit="days">--</span><span class="cdown-label">Days</span></div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-block"><span class="cdown-val" data-unit="hours">--</span><span class="cdown-label">Hrs</span></div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-block"><span class="cdown-val" data-unit="mins">--</span><span class="cdown-label">Min</span></div>
+              </div>
+              <a href="#" class="event-register-btn btn-register-event" data-event="InsightFlux AI Dashboard Suite — Grand Launch">Register Now →</a>
+            </div>
+          </div>
+
+          <!-- Duplicated Cards for Continuous Loop -->
+          <!-- Event Card 1 (Duplicated) -->
+          <div class="event-card glass-card">
+            <div class="event-card-header" style="background: linear-gradient(135deg, #6C3BFF 0%, #A855F7 100%);">
+              <div class="event-type-badge">Free Workshop</div>
+              <div class="event-date-bubble">
+                <span class="event-day">19</span>
+                <span class="event-month">Jul</span>
+              </div>
+            </div>
+            <div class="event-card-body">
+              <div class="event-meta">
+                <span class="event-mode online">Online • Zoom</span>
+                <span class="event-time">10:00 AM IST</span>
+              </div>
+              <h3 class="event-title">Data Analytics Bootcamp for Beginners</h3>
+              <p class="event-desc">A hands-on 3-hour live session covering Excel, SQL basics, and Power BI fundamentals. Perfect for students and career switchers.</p>
+              <div class="event-countdown" data-date="2026-07-19T10:00:00+05:30">
+                <div class="countdown-block"><span class="cdown-val" data-unit="days">--</span><span class="cdown-label">Days</span></div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-block"><span class="cdown-val" data-unit="hours">--</span><span class="cdown-label">Hrs</span></div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-block"><span class="cdown-val" data-unit="mins">--</span><span class="cdown-label">Min</span></div>
+              </div>
+              <a href="#" class="event-register-btn btn-register-event" data-event="Data Analytics Bootcamp for Beginners">Register Free →</a>
+            </div>
+          </div>
+
+          <!-- Event Card 2 (Duplicated) -->
+          <div class="event-card glass-card">
+            <div class="event-card-header" style="background: linear-gradient(135deg, #0EA5E9 0%, #6366F1 100%);">
+              <div class="event-type-badge">Webinar</div>
+              <div class="event-date-bubble">
+                <span class="event-day">26</span>
+                <span class="event-month">Jul</span>
+              </div>
+            </div>
+            <div class="event-card-body">
+              <div class="event-meta">
+                <span class="event-mode online">Online • Google Meet</span>
+                <span class="event-time">6:00 PM IST</span>
+              </div>
+              <h3 class="event-title">AI in Business: Real-World Automation Use Cases</h3>
+              <p class="event-desc">Discover how Indian SMBs are using AI to cut costs and boost efficiency. Live demos with n8n, Make.com, and OpenAI integrations.</p>
+              <div class="event-countdown" data-date="2026-07-26T18:00:00+05:30">
+                <div class="countdown-block"><span class="cdown-val" data-unit="days">--</span><span class="cdown-label">Days</span></div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-block"><span class="cdown-val" data-unit="hours">--</span><span class="cdown-label">Hrs</span></div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-block"><span class="cdown-val" data-unit="mins">--</span><span class="cdown-label">Min</span></div>
+              </div>
+              <a href="#" class="event-register-btn btn-register-event" data-event="AI in Business: Real-World Automation Use Cases">Register Free →</a>
+            </div>
+          </div>
+
+          <!-- Event Card 3 (Duplicated) -->
+          <div class="event-card glass-card">
+            <div class="event-card-header" style="background: linear-gradient(135deg, #059669 0%, #0EA5E9 100%);">
+              <div class="event-type-badge">Masterclass</div>
+              <div class="event-date-bubble">
+                <span class="event-day">09</span>
+                <span class="event-month">Aug</span>
+              </div>
+            </div>
+            <div class="event-card-body">
+              <div class="event-meta">
+                <span class="event-mode online">Online • Zoom</span>
+                <span class="event-time">11:00 AM IST</span>
+              </div>
+              <h3 class="event-title">Power BI Masterclass: Build a Live Sales Dashboard</h3>
+              <p class="event-desc">Step-by-step guided session to design a fully interactive sales dashboard with DAX formulas, drill-throughs, and dynamic slicers from scratch.</p>
+              <div class="event-countdown" data-date="2026-08-09T11:00:00+05:30">
+                <div class="countdown-block"><span class="cdown-val" data-unit="days">--</span><span class="cdown-label">Days</span></div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-block"><span class="cdown-val" data-unit="hours">--</span><span class="cdown-label">Hrs</span></div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-block"><span class="cdown-val" data-unit="mins">--</span><span class="cdown-label">Min</span></div>
+              </div>
+              <a href="#" class="event-register-btn btn-register-event" data-event="Power BI Masterclass: Build a Live Sales Dashboard">Register Now →</a>
+            </div>
+          </div>
+
+          <!-- Event Card 4 (Duplicated) -->
+          <div class="event-card glass-card">
+            <div class="event-card-header" style="background: linear-gradient(135deg, #F59E0B 0%, #EF4444 100%);">
+              <div class="event-type-badge">Hackathon</div>
+              <div class="event-date-bubble">
+                <span class="event-day">23</span>
+                <span class="event-month">Aug</span>
+              </div>
+            </div>
+            <div class="event-card-body">
+              <div class="event-meta">
+                <span class="event-mode hybrid">Hybrid • Coimbatore + Online</span>
+                <span class="event-time">9:00 AM IST</span>
+              </div>
+              <h3 class="event-title">InsightFlux DataThon 2026 — 24-Hour Hackathon</h3>
+              <p class="event-desc">Compete with teams of analysts and developers to solve a live business problem using real-world datasets. Prizes worth ₹50,000+ to be won.</p>
+              <div class="event-countdown" data-date="2026-08-23T09:00:00+05:30">
+                <div class="countdown-block"><span class="cdown-val" data-unit="days">--</span><span class="cdown-label">Days</span></div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-block"><span class="cdown-val" data-unit="hours">--</span><span class="cdown-label">Hrs</span></div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-block"><span class="cdown-val" data-unit="mins">--</span><span class="cdown-label">Min</span></div>
+              </div>
+              <a href="#" class="event-register-btn event-register-btn--hot btn-register-event" data-event="InsightFlux DataThon 2026 — 24-Hour Hackathon">Register Now →</a>
+            </div>
+          </div>
+
+          <!-- Event Card 5 (Duplicated) -->
+          <div class="event-card glass-card">
+            <div class="event-card-header" style="background: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);">
+              <div class="event-type-badge">Panel Talk</div>
+              <div class="event-date-bubble">
+                <span class="event-day">06</span>
+                <span class="event-month">Sep</span>
+              </div>
+            </div>
+            <div class="event-card-body">
+              <div class="event-meta">
+                <span class="event-mode online">Online • YouTube Live</span>
+                <span class="event-time">7:00 PM IST</span>
+              </div>
+              <h3 class="event-title">Future of Work: AI, Analytics & Career Transitions</h3>
+              <p class="event-desc">Industry experts share insights on how AI is reshaping job roles and what skills are essential for the next decade of data-driven careers.</p>
+              <div class="event-countdown" data-date="2026-09-06T19:00:00+05:30">
+                <div class="countdown-block"><span class="cdown-val" data-unit="days">--</span><span class="cdown-label">Days</span></div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-block"><span class="cdown-val" data-unit="hours">--</span><span class="cdown-label">Hrs</span></div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-block"><span class="cdown-val" data-unit="mins">--</span><span class="cdown-label">Min</span></div>
+              </div>
+              <a href="#" class="event-register-btn btn-register-event" data-event="Future of Work: AI, Analytics & Career Transitions">Register Free →</a>
+            </div>
+          </div>
+
+          <!-- Event Card 6 (Duplicated) -->
+          <div class="event-card glass-card">
+            <div class="event-card-header" style="background: linear-gradient(135deg, #0F172A 0%, #6C3BFF 100%);">
+              <div class="event-type-badge">Product Launch</div>
+              <div class="event-date-bubble">
+                <span class="event-day">20</span>
+                <span class="event-month">Sep</span>
+              </div>
+            </div>
+            <div class="event-card-body">
+              <div class="event-meta">
+                <span class="event-mode online">Online • Zoom</span>
+                <span class="event-time">12:00 PM IST</span>
+              </div>
+              <h3 class="event-title">InsightFlux AI Dashboard Suite — Grand Launch</h3>
+              <p class="event-desc">Be among the first to experience our flagship AI-powered dashboard platform. Exclusive early-bird pricing for attendees and a live product walkthrough.</p>
+              <div class="event-countdown" data-date="2026-09-20T12:00:00+05:30">
+                <div class="countdown-block"><span class="cdown-val" data-unit="days">--</span><span class="cdown-label">Days</span></div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-block"><span class="cdown-val" data-unit="hours">--</span><span class="cdown-label">Hrs</span></div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-block"><span class="cdown-val" data-unit="mins">--</span><span class="cdown-label">Min</span></div>
+              </div>
+              <a href="#" class="event-register-btn btn-register-event" data-event="InsightFlux AI Dashboard Suite — Grand Launch">Register Now →</a>
+            </div>
+          </div>
+
+        </div><!-- /.events-slider -->
+      </div>
+
+    </div>
+  </section>
+
   <!-- Why InsightFlux Section -->
   <section class="section" id="why-us">
     <div class="container">
@@ -99,7 +459,7 @@
       
       <div class="why-grid">
         <!-- Card 1 -->
-        <div class="glass-card why-card reveal">
+        <div class="glass-card why-card reveal-left">
           <div class="why-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
           </div>
@@ -107,7 +467,7 @@
           <p>Top-notch solutions built to the highest industry standards, ensuring robustness, scalability, and long-term value.</p>
         </div>
         <!-- Card 2 -->
-        <div class="glass-card why-card reveal delay-1">
+        <div class="glass-card why-card reveal">
           <div class="why-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
           </div>
@@ -115,7 +475,7 @@
           <p>Agile development processes and professional team coordination that guarantee on-time delivery with zero compromise on quality.</p>
         </div>
         <!-- Card 3 -->
-        <div class="glass-card why-card reveal delay-2">
+        <div class="glass-card why-card reveal-right">
           <div class="why-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
           </div>
@@ -123,7 +483,7 @@
           <p>A powerhouse of skilled analysts, developers, and AI strategists passionate about solving your complex digital challenges.</p>
         </div>
         <!-- Card 4 -->
-        <div class="glass-card why-card reveal">
+        <div class="glass-card why-card reveal-left">
           <div class="why-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
           </div>
@@ -131,7 +491,7 @@
           <p>Tailored strategies and custom applications built specifically to address your unique bottlenecks and business goals.</p>
         </div>
         <!-- Card 5 -->
-        <div class="glass-card why-card reveal delay-1">
+        <div class="glass-card why-card reveal">
           <div class="why-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
           </div>
@@ -139,7 +499,7 @@
           <p>State-of-the-art data compliance and privacy practices. Your business intelligence and IP are safe with enterprise-grade security.</p>
         </div>
         <!-- Card 6 -->
-        <div class="glass-card why-card reveal delay-2">
+        <div class="glass-card why-card reveal-right">
           <div class="why-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line><line x1="2" y1="20" x2="22" y2="20"></line></svg>
           </div>
@@ -153,7 +513,7 @@
   <!-- About Section -->
   <section class="section" id="about">
     <div class="container about-layout">
-      <div class="about-text reveal">
+      <div class="about-text reveal-left">
         <span class="section-badge">About Us</span>
         <h2>About InsightFlux Analytics</h2>
         <p class="about-desc">
@@ -210,38 +570,54 @@
       </div>
       
       <!-- Interactive Data Pipeline Visual -->
-      <div class="about-visual reveal">
+      <div class="about-visual reveal-right">
         <svg class="about-visual-svg" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
           <!-- Main Circle -->
           <circle cx="250" cy="250" r="180" stroke="#6C3BFF" stroke-opacity="0.1" stroke-width="4"/>
-          <circle cx="250" cy="250" r="150" stroke="#6C3BFF" stroke-opacity="0.2" stroke-width="2" stroke-dasharray="8 8"/>
+          <circle cx="250" cy="250" r="150" stroke="#6C3BFF" stroke-opacity="0.2" stroke-width="2" stroke-dasharray="8 8" class="orbit-track" style="transform-origin: 250px 250px;" />
           
-          <!-- Connections -->
-          <line x1="250" y1="100" x2="250" y2="400" stroke="#6C3BFF" stroke-opacity="0.1" stroke-width="2" />
-          <line x1="100" y1="250" x2="400" y2="250" stroke="#6C3BFF" stroke-opacity="0.1" stroke-width="2" />
+          <!-- Connections with Animated Pulse Flow -->
+          <line x1="250" y1="100" x2="250" y2="400" stroke="#6C3BFF" stroke-opacity="0.25" stroke-width="2.5" class="flow-line flow-line-vertical" />
+          <line x1="100" y1="250" x2="400" y2="250" stroke="#6C3BFF" stroke-opacity="0.25" stroke-width="2.5" class="flow-line flow-line-horizontal" />
           
-          <!-- Core Node -->
-          <circle cx="250" cy="250" r="45" fill="url(#core-grad)" filter="url(#glow-filter)" />
-          <path d="M238 250L246 258L262 242" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- Core Node (Breathing & Glowing) -->
+          <g class="satellite-node" style="transform-origin: 250px 250px; animation: node-pulse-core 3.5s ease-in-out infinite;">
+            <circle cx="250" cy="250" r="45" fill="url(#core-grad)" filter="url(#glow-filter)" />
+            <path d="M238 250L246 258L262 242" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
           
-          <!-- Satellite Nodes -->
-          <circle cx="250" cy="100" r="24" fill="#111827" stroke="#6C3BFF" stroke-width="2" />
-          <path d="M244 100H256M250 94V106" stroke="#8A5CFF" stroke-width="2"/>
+          <!-- Satellite Nodes (Breathing & Pulsing) -->
+          <!-- Top Node -->
+          <g class="satellite-node" style="transform-origin: 250px 100px; animation: node-pulse 4s ease-in-out infinite; animation-delay: 0.5s;">
+            <circle cx="250" cy="100" r="24" fill="#111827" stroke="#6C3BFF" stroke-width="2" />
+            <path d="M244 100H256M250 94V106" stroke="#8A5CFF" stroke-width="2"/>
+          </g>
           
-          <circle cx="400" cy="250" r="24" fill="#111827" stroke="#6C3BFF" stroke-width="2" />
-          <path d="M394 246L406 250L394 254" stroke="#8A5CFF" stroke-width="2"/>
+          <!-- Right Node -->
+          <g class="satellite-node" style="transform-origin: 400px 250px; animation: node-pulse 4.5s ease-in-out infinite; animation-delay: 1.2s;">
+            <circle cx="400" cy="250" r="24" fill="#111827" stroke="#6C3BFF" stroke-width="2" />
+            <path d="M394 246L406 250L394 254" stroke="#8A5CFF" stroke-width="2"/>
+          </g>
           
-          <circle cx="250" cy="400" r="24" fill="#111827" stroke="#6C3BFF" stroke-width="2" />
-          <path d="M242 400C242 396 258 396 258 400" stroke="#8A5CFF" stroke-width="2"/>
+          <!-- Bottom Node -->
+          <g class="satellite-node" style="transform-origin: 250px 400px; animation: node-pulse 4s ease-in-out infinite; animation-delay: 2s;">
+            <circle cx="250" cy="400" r="24" fill="#111827" stroke="#6C3BFF" stroke-width="2" />
+            <path d="M242 400C242 396 258 396 258 400" stroke="#8A5CFF" stroke-width="2"/>
+          </g>
           
-          <circle cx="100" cy="250" r="24" fill="#111827" stroke="#6C3BFF" stroke-width="2" />
-          <circle cx="100" cy="250" r="6" fill="#8A5CFF" />
+          <!-- Left Node -->
+          <g class="satellite-node" style="transform-origin: 100px 250px; animation: node-pulse 4.5s ease-in-out infinite; animation-delay: 1.5s;">
+            <circle cx="100" cy="250" r="24" fill="#111827" stroke="#6C3BFF" stroke-width="2" />
+            <circle cx="100" cy="250" r="6" fill="#8A5CFF" />
+          </g>
           
           <!-- Outer orbital dots -->
-          <circle cx="144" cy="144" r="8" fill="#8A5CFF" opacity="0.6"/>
-          <circle cx="356" cy="144" r="8" fill="#6C3BFF" opacity="0.8"/>
-          <circle cx="356" cy="356" r="8" fill="#8A5CFF" opacity="0.6"/>
-          <circle cx="144" cy="356" r="8" fill="#6C3BFF" opacity="0.8"/>
+          <g class="orbit-track" style="transform-origin: 250px 250px; animation: rotate-orbit-reverse 30s linear infinite;">
+            <circle cx="144" cy="144" r="8" fill="#8A5CFF" opacity="0.6"/>
+            <circle cx="356" cy="144" r="8" fill="#6C3BFF" opacity="0.8"/>
+            <circle cx="356" cy="356" r="8" fill="#8A5CFF" opacity="0.6"/>
+            <circle cx="144" cy="356" r="8" fill="#6C3BFF" opacity="0.8"/>
+          </g>
 
           <!-- Definitions -->
           <defs>
@@ -451,9 +827,9 @@
         <p class="section-subtitle">Choose a plan that fits your business scale. No hidden charges, completely tailored to your digital growth.</p>
       </div>
 
-      <div class="pricing-grid reveal">
+      <div class="pricing-grid">
         <!-- Plan 1: Local / Basic -->
-        <div class="glass-card pricing-card">
+        <div class="glass-card pricing-card reveal-left">
           <div style="margin-bottom: 2rem;">
             <span class="pricing-plan-badge">Basic / Setup</span>
             <h3>Startup & Local</h3>
@@ -484,7 +860,7 @@
         </div>
 
         <!-- Plan 2: Analytics & Growth (Popular) -->
-        <div class="glass-card pricing-card featured-plan">
+        <div class="glass-card pricing-card featured-plan reveal-zoom">
           <div class="pricing-badge-popular">Most Popular</div>
           <div style="margin-bottom: 2rem;">
             <span class="pricing-plan-badge">Growth & Development</span>
@@ -516,7 +892,7 @@
         </div>
 
         <!-- Plan 3: Enterprise / Custom -->
-        <div class="glass-card pricing-card">
+        <div class="glass-card pricing-card reveal-right">
           <div style="margin-bottom: 2rem;">
             <span class="pricing-plan-badge">AI & Automation</span>
             <h3>Enterprise & AI</h3>
@@ -974,6 +1350,44 @@
         preload="metadata"
         aria-label="Data Analytics Workshop Recording"
       ></video>
+    </div>
+  </div>
+
+  <!-- Event Registration Modal -->
+  <div class="video-modal-overlay" id="register-modal" role="dialog" aria-modal="true" aria-label="Event Registration Form">
+    <div class="video-modal-box" style="max-width: 480px; padding: 2rem;">
+      <button class="video-modal-close" id="register-modal-close" aria-label="Close form">&times;</button>
+      <div style="margin-bottom: 1.5rem; text-align: center;">
+        <span class="video-modal-badge" style="background: rgba(108, 59, 255, 0.1); color: var(--primary-purple); border: 1px solid rgba(108, 59, 255, 0.2); padding: 0.4rem 1rem; border-radius: 100px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">Seat Reservation</span>
+        <h3 style="font-size: 1.5rem; margin-top: 0.75rem; color: var(--deep-navy);" id="register-modal-title">Workshop Registration</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.35rem;" id="register-modal-subtitle">Registering for: Event Name</p>
+      </div>
+      
+      <form id="register-form">
+        <input type="hidden" id="register-event-name">
+        
+        <div style="margin-bottom: 1rem; text-align: left;">
+          <label for="register-name" style="display: block; font-size: 0.8rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.4rem;">Full Name *</label>
+          <input type="text" id="register-name" required placeholder="John Doe" style="width: 100%; padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid var(--border-color); background: rgba(255, 255, 255, 0.5); font-size: 0.9rem; color: var(--text-dark);">
+        </div>
+
+        <div style="margin-bottom: 1rem; text-align: left;">
+          <label for="register-email" style="display: block; font-size: 0.8rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.4rem;">Email Address *</label>
+          <input type="email" id="register-email" required placeholder="john@example.com" style="width: 100%; padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid var(--border-color); background: rgba(255, 255, 255, 0.5); font-size: 0.9rem; color: var(--text-dark);">
+        </div>
+
+        <div style="margin-bottom: 1rem; text-align: left;">
+          <label for="register-whatsapp" style="display: block; font-size: 0.8rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.4rem;">WhatsApp Number *</label>
+          <input type="tel" id="register-whatsapp" required placeholder="+91 98765 43210" style="width: 100%; padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid var(--border-color); background: rgba(255, 255, 255, 0.5); font-size: 0.9rem; color: var(--text-dark);">
+        </div>
+
+        <div style="margin-bottom: 1.5rem; text-align: left;">
+          <label for="register-company" style="display: block; font-size: 0.8rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.4rem;">Institution / Company Name *</label>
+          <input type="text" id="register-company" required placeholder="PSG College of Technology" style="width: 100%; padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid var(--border-color); background: rgba(255, 255, 255, 0.5); font-size: 0.9rem; color: var(--text-dark);">
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.85rem; border-radius: 8px; font-weight: 700; font-size: 1rem; border: none; cursor: pointer; transition: var(--transition-smooth);">Confirm Registration</button>
+      </form>
     </div>
   </div>
 </body>
