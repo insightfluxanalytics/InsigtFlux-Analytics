@@ -5,13 +5,72 @@
 
 // --- Immediate Theme Check (Prevents Layout Flash) ---
 (function() {
-  const currentTheme = localStorage.getItem('theme') || 'light';
+  const currentTheme = localStorage.getItem('theme') || 'dark';
   if (currentTheme === 'dark') {
     document.body.classList.add('dark-theme');
   }
 })();
 
 document.addEventListener('DOMContentLoaded', () => {
+  // --- Query Parameter Pre-filling ---
+  try {
+    const urlParams = new URLSearchParams(window.location.search);
+    const paramService = urlParams.get('service');
+    const paramPlan = urlParams.get('plan');
+    const paramEvent = urlParams.get('event');
+
+    const contactServiceSelect = document.getElementById('service');
+    const contactMessageTextarea = document.getElementById('message');
+
+    if (contactServiceSelect) {
+      if (paramEvent) {
+        contactServiceSelect.value = "Workshop Registration";
+        const eventMapping = {
+          'bootcamp-july': 'Data Analytics Bootcamp for Beginners',
+          'ai-webinar-july': 'AI in Business: Real-World Automation Use Cases',
+          'powerbi-masterclass': 'Power BI Masterclass: Build a Live Sales Dashboard',
+          'datathon-2026': 'InsightFlux DataThon 2026 — 24-Hour Hackathon',
+          'panel-sep': 'Future of Work: AI, Analytics & Career Transitions',
+          'launch-sep': 'InsightFlux AI Dashboard Suite — Grand Launch'
+        };
+        const eventName = eventMapping[paramEvent] || paramEvent;
+        if (contactMessageTextarea) {
+          contactMessageTextarea.value = `I would like to register for the upcoming event: ${eventName}.`;
+        }
+      } else if (paramService) {
+        const serviceMapping = {
+          'data-analytics': 'Data Analytics & BI',
+          'powerbi': 'Power BI Dashboards',
+          'ai-automation': 'AI Automations & Integrations',
+          'web-dev': 'Website Development',
+          'portfolio': 'Portfolio Development',
+          'strategy': 'Business Growth Strategy',
+          'gbp': 'Google Business Profiles',
+          'marketing': 'Digital Marketing Solutions',
+          'chatbots': 'AI Chatbots & Automations',
+          'ecommerce': 'E-Commerce Solutions',
+          'social-media': 'Social Media Management',
+          'uiux': 'UI/UX Design',
+          'seo': 'SEO & Growth Optimization',
+          'lead-gen': 'Lead Generation Solutions',
+          'branding': 'Branding & Identity',
+          'consulting': 'Consulting & Support'
+        };
+        const serviceVal = serviceMapping[paramService];
+        if (serviceVal) {
+          contactServiceSelect.value = serviceVal;
+        }
+      } else if (paramPlan) {
+        contactServiceSelect.value = 'Consulting & Support';
+        if (contactMessageTextarea) {
+          contactMessageTextarea.value = `Inquiry regarding the ${paramPlan.charAt(0).toUpperCase() + paramPlan.slice(1)} Pricing Plan.`;
+        }
+      }
+    }
+  } catch (err) {
+    console.error("Query param parse error:", err);
+  }
+
   // --- Sticky Header Scroll Effect ---
   const header = document.querySelector('.header');
   if (header) {
@@ -71,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // --- Scroll Reveal Animations ---
-  const revealElements = document.querySelectorAll('.reveal');
+  const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-zoom');
   if (revealElements.length > 0) {
     const revealOnScroll = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
@@ -82,12 +141,70 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     }, {
-      threshold: 0.15,
-      rootMargin: '0px 0px -50px 0px'
+      threshold: 0.1,
+      rootMargin: '0px 0px -40px 0px'
     });
 
     revealElements.forEach(el => revealOnScroll.observe(el));
   }
+
+  // --- Parallax Scrolling Elements (Meltano Style) ---
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    
+    // 1. Move background parallax blobs
+    const blobs = document.querySelectorAll('.parallax-blob');
+    blobs.forEach(blob => {
+      const speed = parseFloat(blob.getAttribute('data-speed')) || 0.1;
+      blob.style.transform = `translateY(${scrolled * speed}px)`;
+    });
+
+    // 2. Parallax effect for Hero content (fade and slight translate)
+    const heroContent = document.querySelector('.hero-content');
+    if (heroContent && window.innerWidth > 768) {
+      const heroShift = scrolled * 0.22;
+      const heroOpacity = Math.max(0, 1 - (scrolled / 550));
+      heroContent.style.transform = `translateY(${heroShift}px)`;
+      heroContent.style.opacity = heroOpacity;
+    }
+
+    // 3. Zoom / open screen animation on scroll
+    const eventsSec = document.querySelector('.events-section');
+    if (eventsSec) {
+      const rect = eventsSec.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      
+      // Calculate how far the events section is through the viewport
+      if (rect.top < viewportHeight && rect.bottom > 0) {
+        const scrolledFraction = (viewportHeight - rect.top) / (viewportHeight + rect.height * 0.5); 
+        const progress = Math.min(1, Math.max(0, scrolledFraction)); // Clamp between 0 and 1
+        
+        // Progress goes from 0 (starts entering screen) to 1 (fully in screen)
+        // Scale from 0.90 to 1.0
+        const scaleVal = 0.90 + (progress * 0.10);
+        // Rotation from 12deg to 0deg
+        const rotateVal = 12 * (1 - progress);
+        
+        eventsSec.style.setProperty('--events-scale', scaleVal);
+        eventsSec.style.setProperty('--events-rotate', `${rotateVal}deg`);
+      }
+    }
+
+    // 4. Move Hero Parallax Office Background (Meltano style zoom & offset)
+    if (window.innerWidth > 768 && scrolled < 900) {
+      const layers = document.querySelectorAll('.hero-parallax-layer');
+      layers.forEach(layer => {
+        const speed = parseFloat(layer.getAttribute('data-speed')) || 0.1;
+        
+        if (layer.classList.contains('layer-office')) {
+          // The office background zooms in slightly and pans down to create an immersive camera scale
+          const scaleVal = 1 + (scrolled * 0.0003);
+          const shiftY = scrolled * speed;
+          layer.style.transform = `translateY(${shiftY}px) scale(${scaleVal})`;
+        }
+      });
+    }
+  }, { passive: true });
 
   // --- Services Category Filtering (Homepage) ---
   const filterButtons = document.querySelectorAll('.filter-btn');
@@ -221,6 +338,24 @@ document.addEventListener('DOMContentLoaded', () => {
           return;
         }
 
+        // Save to LocalStorage for Admin Portal
+        try {
+          const apps = JSON.parse(localStorage.getItem('insightflux_applications') || '[]');
+          apps.unshift({
+            id: Date.now(),
+            name,
+            email,
+            phone,
+            role,
+            portfolio: portfolio || 'N/A',
+            message,
+            date: new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })
+          });
+          localStorage.setItem('insightflux_applications', JSON.stringify(apps));
+        } catch (err) {
+          console.error("LocalStorage save error:", err);
+        }
+
         // Simple visual feedback
         const submitBtn = applyForm.querySelector('button[type="submit"]');
         const originalText = submitBtn.innerHTML;
@@ -267,6 +402,38 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!name || !email || !message) {
         alert('Please fill out all required fields (Name, Email, and Message).');
         return;
+      }
+
+      // Save to LocalStorage for Admin Portal
+      try {
+        if (service === "Workshop Registration") {
+          const regs = JSON.parse(localStorage.getItem('insightflux_workshop_registrations') || '[]');
+          regs.unshift({
+            id: Date.now(),
+            name,
+            email,
+            phone: phone || 'N/A',
+            company: company || 'N/A',
+            eventName: message.replace('I would like to register for the upcoming event:', '').trim(),
+            date: new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })
+          });
+          localStorage.setItem('insightflux_workshop_registrations', JSON.stringify(regs));
+        } else {
+          const contacts = JSON.parse(localStorage.getItem('insightflux_contacts') || '[]');
+          contacts.unshift({
+            id: Date.now(),
+            name,
+            email,
+            phone: phone || 'N/A',
+            company: company || 'N/A',
+            service,
+            message,
+            date: new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })
+          });
+          localStorage.setItem('insightflux_contacts', JSON.stringify(contacts));
+        }
+      } catch (err) {
+        console.error("LocalStorage save error:", err);
       }
 
       // Visual feedback
@@ -348,5 +515,155 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
-});
 
+  // --- Workshop Registration Modal ---
+  const registerModal = document.getElementById('register-modal');
+  const registerModalClose = document.getElementById('register-modal-close');
+  const registerForm = document.getElementById('register-form');
+  const registerEventNameInput = document.getElementById('register-event-name');
+  const registerModalSubtitle = document.getElementById('register-modal-subtitle');
+
+  function openRegisterModal(eventName) {
+    if (!registerModal) return;
+    registerEventNameInput.value = eventName;
+    if (registerModalSubtitle) {
+      registerModalSubtitle.textContent = `Registering for: ${eventName}`;
+    }
+    registerModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeRegisterModal() {
+    if (!registerModal) return;
+    registerModal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+  }
+
+  // Bind all register buttons
+  document.addEventListener('click', (e) => {
+    const registerBtn = e.target.closest('.btn-register-event');
+    if (registerBtn) {
+      e.preventDefault();
+      const eventName = registerBtn.getAttribute('data-event') || 'Live Event';
+      openRegisterModal(eventName);
+    }
+  });
+
+  if (registerModalClose) {
+    registerModalClose.addEventListener('click', closeRegisterModal);
+  }
+
+  if (registerModal) {
+    registerModal.addEventListener('click', (e) => {
+      if (e.target === registerModal) closeRegisterModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && registerModal.classList.contains('active')) {
+        closeRegisterModal();
+      }
+    });
+  }
+
+  // Handle registration submit
+  if (registerForm) {
+    registerForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const eventName = registerEventNameInput.value;
+      const name = document.getElementById('register-name').value.trim();
+      const email = document.getElementById('register-email').value.trim();
+      const whatsapp = document.getElementById('register-whatsapp').value.trim();
+      const company = document.getElementById('register-company').value.trim();
+
+      if (!name || !email || !whatsapp || !company) {
+        alert('Please fill out all required fields.');
+        return;
+      }
+
+      // Save to LocalStorage for Admin Portal
+      try {
+        const regs = JSON.parse(localStorage.getItem('insightflux_workshop_registrations') || '[]');
+        regs.unshift({
+          id: Date.now(),
+          name,
+          email,
+          whatsapp,
+          company,
+          eventName,
+          date: new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })
+        });
+        localStorage.setItem('insightflux_workshop_registrations', JSON.stringify(regs));
+      } catch (err) {
+        console.error("LocalStorage save error:", err);
+      }
+
+      // Visual feedback
+      const submitBtn = registerForm.querySelector('button[type="submit"]');
+      const originalText = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = 'Submitting...';
+
+      // Automatically construct the mailto link and redirect
+      const subject = encodeURIComponent(`Workshop Registration: ${eventName} - ${name}`);
+      const body = encodeURIComponent(`Hello InsightFlux Analytics Team,\n\nI would like to register for the workshop: "${eventName}".\n\nHere are my registration details:\n- Name: ${name}\n- Email: ${email}\n- WhatsApp: ${whatsapp}\n- Institution/Company: ${company}\n\nSincerely,\n${name}`);
+      
+      const mailtoUrl = `mailto:insightfluxa@gmail.com?subject=${subject}&body=${body}`;
+
+      setTimeout(() => {
+        // Trigger mail client
+        window.location.href = mailtoUrl;
+
+        // Success Alert
+        alert(`Thank you, ${name}! Your registration for "${eventName}" has been captured. Your email client will now open to submit your details directly to insightfluxa@gmail.com.`);
+        
+        registerForm.reset();
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+        closeRegisterModal();
+      }, 1000);
+    });
+  }
+
+  // ============================================================
+  // EVENT COUNTDOWN TIMERS
+  // ============================================================
+  (function initEventCountdowns() {
+    const countdowns = document.querySelectorAll('.event-countdown[data-date]');
+    if (!countdowns.length) return;
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    function updateCountdown(el) {
+      const target = new Date(el.getAttribute('data-date')).getTime();
+      const now    = Date.now();
+      const diff   = target - now;
+
+      const daysEl  = el.querySelector('[data-unit="days"]');
+      const hoursEl = el.querySelector('[data-unit="hours"]');
+      const minsEl  = el.querySelector('[data-unit="mins"]');
+
+      if (diff <= 0) {
+        if (daysEl)  daysEl.textContent  = '00';
+        if (hoursEl) hoursEl.textContent = '00';
+        if (minsEl)  minsEl.textContent  = '00';
+        return;
+      }
+
+      const totalSecs = Math.floor(diff / 1000);
+      const days  = Math.floor(totalSecs / 86400);
+      const hours = Math.floor((totalSecs % 86400) / 3600);
+      const mins  = Math.floor((totalSecs % 3600)  / 60);
+
+      if (daysEl)  daysEl.textContent  = pad(days);
+      if (hoursEl) hoursEl.textContent = pad(hours);
+      if (minsEl)  minsEl.textContent  = pad(mins);
+    }
+
+    // Initial render
+    countdowns.forEach(updateCountdown);
+
+    // Update every minute
+    setInterval(() => countdowns.forEach(updateCountdown), 60000);
+  })();
+
+});
